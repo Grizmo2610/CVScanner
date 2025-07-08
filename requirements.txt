@@ -1,2 +1,4 @@
 google-genai
 pymupdf
+flask
+werkzeug
