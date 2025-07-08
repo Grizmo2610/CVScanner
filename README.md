@@ -16,7 +16,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Grizmo2610/CVScanner">
-    <img src="static/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="static/images/Logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">CV AI Summarizer</h3>
@@ -157,22 +157,17 @@ You need to upload your resume file first. Then, customize the following setting
 ## Roadmap
 
 * [x] Read CV
-
   * [x] PDF
   * [ ] DOCX
   * [ ] Image
-  * [ ] Text
 * [x] Extract information and summarize content
 * [x] Build a basic web interface and demo
-
   * [x] Web interface with HTML and CSS
   * [x] Use Flask backend to read and process data
 * [x] Return results with highlight
 * [x] Set up repositories
 * [ ] Add JD analysis and comparison features
-
   * [ ] Add a section to input JD
-
     * [ ] Manual input
     * [ ] Upload file
   * Add JD analysis
