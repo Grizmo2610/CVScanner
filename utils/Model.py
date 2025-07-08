@@ -109,3 +109,12 @@ class PDFReader:
             f"Highlight special skill and result"
         )
         return self.__ai.respone(self.get_content(), prompt)
+
+    def set_key(self, key: str):
+        """
+        Set API of Gemini Key model
+        
+        Args:
+            key: Google API Key
+        """
+        self.__ai.set_key(key)

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from utils.Model import PDFReader
+from utils.Model import PDFReader, GeminiModel
 from werkzeug.utils import secure_filename
 import os
 import tempfile
@@ -27,7 +27,7 @@ def summarize():
 
     reader = PDFReader(file_path, gemini_key_path='private/gemini.key', lang=lang)
     if api_key:
-        reader._PDFReader__ai.set_key(api_key)
+        reader.set_key(api_key)
     summary = reader.summary(limit)
     text_content = reader.get_content()
 
