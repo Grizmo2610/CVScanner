@@ -15,7 +15,7 @@ def index():
 def summarize():
     file = request.files.get('file')
     lang = request.form.get('language', 'vie')
-    limit = request.form.get('limit', '250')
+    limit = request.form.get('limit', '500')
     api_key = request.form.get('api_key', '')
 
     if not file:
