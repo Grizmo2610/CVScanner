@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI CV Summarizer | Extract Key Information from
+            Documents</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="static/css/style.css">
+        <link rel="icon" type="image/png" href="static/images/Logo.png">
+    </head>
+    <body class="bg-gray-50 min-h-screen">
+        <div class="container mx-auto px-4 py-8 max-w-7xl">
+            <!-- Header -->
+            <header class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">AI
+                    CV Summarizer</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Upload your CV and instantly get a concise
+                    AI-generated summary in your preferred language.
+                </p>
+            </header>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Upload & Settings Section -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <div class="space-y-6">
+                        <!-- PDF Upload -->
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-gray-700 mb-2"
+                                for="pdf-upload">
+                                Upload PDF Document
+                            </label>
+                            <div
+                                class="file-upload mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="space-y-1 text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400"
+                                        stroke="currentColor" fill="none"
+                                        viewBox="0 0 48 48" aria-hidden="true">
+                                        <path
+                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="pdf-upload"
+                                            class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                            <span>Select a file</span>
+                                            <input id="pdf-upload"
+                                                name="pdf-upload" type="file"
+                                                class="file-upload-input"
+                                                accept=".pdf" />
+                                        </label>
+                                        <p class="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PDF up to
+                                        10MB</p>
+                                    <p id="file-name"
+                                        class="mt-1 text-sm font-medium text-gray-700 hidden"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings Row -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Language Select -->
+                            <div>
+                                <label for="language"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Output
+                                    Language</label>
+                                <select id="language"
+                                    class="language-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border">
+                                    <option selected>Vietnamese</option>
+                                    <option>English</option>
+                                    <option>French</option>
+                                    <option>Spanish</option>
+                                    <option>German</option>
+                                    <option>Japanese</option>
+                                    <option>Chinese</option>
+                                </select>
+                            </div>
+
+                            <!-- Word Limit -->
+                            <div>
+                                <label for="word-limit"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Summary
+                                    Length</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input type="number" id="word-limit"
+                                        class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 py-2 sm:text-sm border-gray-300 rounded-md border"
+                                        placeholder="500" value="500">
+                                    <div
+                                        class="absolute inset-y-0 right-0 flex items-center">
+                                        <span
+                                            class="text-gray-500 sm:text-sm mr-3">words</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Summarize Button -->
+                            <div class="flex items-end">
+                                <button id="summarize-btn" type="button"
+                                    class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    disabled>
+                                    <svg id="loading-spinner"
+                                        class="hidden animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12"
+                                            cy="12" r="10" stroke="currentColor"
+                                            stroke-width="4"></circle>
+                                        <path class="opacity-75"
+                                            fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Summarize Now
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Settings (Collapsible) -->
+                        <div class="pt-2">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer text-sm text-gray-500 hover:text-gray-700">
+                                    <span>Advanced Settings</span>
+                                    <svg
+                                        class="w-5 h-5 text-gray-500 group-open:rotate-90 transform transition-transform"
+                                        fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </summary>
+                                <div class="mt-3">
+                                    <label for="api-key"
+                                        class="block text-sm font-medium text-gray-700 mb-1">API
+                                        Key (Optional)</label>
+                                    <input type="password" id="api-key"
+                                        class="mt-1 block w-full pl-3 pr-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border"
+                                        placeholder="Enter your API key">
+                                    <p class="mt-1 text-xs text-gray-500">Leave
+                                        blank to use our default API</p>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results-section" class="hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Extracted Text Column -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="px-6 py-4 border-b border-gray-200">
+                                <h3
+                                    class="text-lg font-medium text-gray-900">Extracted
+                                    CV Content</h3>
+                            </div>
+                            <div class="px-6 py-4">
+                                <div id="extracted-text"
+                                    class="prose max-w-none text-gray-700 result-panel">
+                                    <!-- PDF text will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Summary Column -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div
+                                class="px-6 py-4 border-b border-gray-200 bg-indigo-50">
+                                <h3
+                                    class="text-lg font-medium text-gray-900">AI-Generated
+                                    Summary</h3>
+                                <div
+                                    class="mt-1 flex items-center text-sm text-indigo-600">
+                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor"
+                                        aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Powered by Gemini 2.5</span>
+                                </div>
+                            </div>
+                            <div class="px-6 py-4">
+                                <div id="ai-summary"
+                                    class="prose max-w-none text-gray-700 result-panel">
+                                    <!-- AI summary will be displayed here -->
+                                    <p class="text-gray-500 italic">Your summary
+                                        will appear here after processing...</p>
+                                </div>
+                            </div>
+                            <div
+                                class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+                                <button id="copy-summary"
+                                    class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <svg class="-ml-0.5 mr-2 h-4 w-4"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                    Copy Summary
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer
+                class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+                <p>AI CV Summarizer - Process your documents with AI in
+                    seconds</p>
+                <p class="mt-1">© 2025 All Rights Reserved</p>
+            </footer>
+        </div>
+
+        <script src="static/js/script.js"></script>
+    </body>
+</html>

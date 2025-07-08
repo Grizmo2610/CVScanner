@@ -1,0 +1,50 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+*.env
+
+# VSCode settings
+.vscode/
+
+# PyCharm & DataSpell settings
+.idea/
+*.iml
+
+# Jupyter Notebooks
+*.ipynb
+
+# Private folders & keys
+private/
+*.key
+
+# Mac OS & system files
+.DS_Store
+Thumbs.db
+
+# Logs and cache
+*.log
+*.bak
+*.swp
+.cache/
+*.tmp
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Test and coverage
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+.pytest_cache/
+nosetests.xml
+test-results/

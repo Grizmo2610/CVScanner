@@ -1,0 +1,62 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.file-upload {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-upload-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.language-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23375A7F' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 16px 12px;
+}
+
+.result-panel {
+    max-height: 500px; /* hoặc bất kỳ chiều cao cố định nào bạn muốn */
+    overflow-y: auto;
+    padding-right: 0.5rem; /* tránh che chữ bởi scrollbar */
+}
+
+.result-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.result-panel::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.4); /* Slate-500 */
+    border-radius: 3px;
+}
+
+#ai-summary h1, #ai-summary h2, #ai-summary h3 {
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+#ai-summary code {
+    background-color: #f4f4f4;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: monospace;
+}
+#ai-summary pre {
+    background-color: #f9fafb;
+    padding: 1em;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: monospace;
+}
