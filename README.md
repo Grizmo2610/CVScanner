@@ -1,241 +1,183 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-
+<!-- Improved compatibility of back to top link -->
 <a id="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+[![Stars][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![project\_license][license-shield]][license-url]
+[![License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
-
 <br />
 <div align="center">
   <a href="https://github.com/Grizmo2610/CVScanner">
     <img src="static/images/Logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">CV AI Summarizer</h3>
+  <h3 align="center">CV AI Summarizer</h3>
 
   <p align="center">
-    Scan, summarize, and check if your resume matches the job description
+    Scan, summarize, and evaluate how well a CV matches a job description
     <br />
-    <a href="https://github.com/Grizmo2610/CVScanner"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Grizmo2610/CVScanner"><strong>Explore the Docs »</strong></a>
     <br />
     <br />
     <a href="https://cv-ai-summarizer.onrender.com/">View Demo</a>
-    &middot;
+    ·
     <a href="https://github.com/Grizmo2610/CVScanner/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    &middot;
+    ·
     <a href="https://github.com/Grizmo2610/CVScanner/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
+---
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## 📌 About The Project
 
-<!-- ABOUT THE PROJECT -->
+![Product Screenshot](static/images/product-screenshot.png)
 
-## About The Project
+Creating a resume is easier than ever, but with the rise of similar-looking CVs, recruiters often struggle to identify the best candidates quickly. Meanwhile, candidates may wonder how well their CV aligns with a job description.
 
-![Product-Screenshot](static/images/product-screenshot.png)
-
-Nowadays, creating a personal resume (CV) is easier than ever. However, due to the overwhelming number of candidates following popular templates and trends, recruiters often face the burden of reading through a flood of CVs to find suitable matches. At the same time, applicants themselves may want to know how well their CV aligns with a given job description.
-
-This tool helps bridge that gap and save time for both parties—employers and candidates—by leveraging artificial intelligence to analyze resumes. It extracts and summarizes candidate information (optional), compares it against job descriptions, and then evaluates the match percentage between the JD and the CV.
+**CV AI Summarizer** helps bridge that gap. It uses artificial intelligence to extract and summarize resume content (optional), compare it against job descriptions, and calculate a match percentage between the CV and JD. This allows recruiters—even without deep industry knowledge—to assess a CV's relevance to a position efficiently.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
+---
 
-* [![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge\&logo=python\&logoColor=ffdd54)](https://www.python.org/)
-* [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge\&logo=flask\&logoColor=white)](https://flask.palletsprojects.com/)
-* [![LLM](https://img.shields.io/badge/LLM-Large%20Language%20Model-blueviolet?style=for-the-badge)](https://en.wikipedia.org/wiki/Large_language_model)
-* [![PyMuPDF](https://img.shields.io/badge/PyMuPDF-PDF%20Parser%20%26%20Renderer-green?style=for-the-badge)](https://pymupdf.readthedocs.io/)
-* [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge\&logo=html5\&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-* [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge\&logo=css3\&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-* [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge\&logo=javascript\&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+### 🛠️ Built With
+
+[![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![LLM](https://img.shields.io/badge/LLM-Large%20Language%20Model-blueviolet?style=for-the-badge)](https://en.wikipedia.org/wiki/Large_language_model)
+[![PyMuPDF](https://img.shields.io/badge/PyMuPDF-PDF%20Parser%20%26%20Renderer-green?style=for-the-badge)](https://pymupdf.readthedocs.io/)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+---
 
-## Getting Started
+## 🚀 Getting Started
 
-Getting started with the app is easy. If you just want to use it, I recommend accessing the demo version via this link: [AI CV Summarizer](https://cv-ai-summarizer.onrender.com/).
+You can either use the demo version or set it up locally.
 
-However, if you want to modify or upgrade the source code to suit your needs (which I totally encourage), or simply want to run it locally on your own system, follow the guide below.
+### 🔗 Demo
+👉 [cv-ai-summarizer.onrender.com](https://cv-ai-summarizer.onrender.com/)
 
-### Prerequisites
+### 📦 Prerequisites
 
-* Python 3.11 or higher
-* pip installed
-* Basic knowledge of Python
+- Python 3.11 or higher
+- `pip` installed
+- Basic Python knowledge
 
-### Installation
-
-Below are the installation steps. These are written from a Windows perspective, but the steps can be adapted to macOS/Linux easily.
-
-1. First, clone this repository:
+### ⚙️ Installation (Windows)
 
 ```bash
 git clone https://github.com/Grizmo2610/CVScanner.git
 cd CVScanner
-```
-
-2. (Optional but recommended) Create and activate a virtual environment:
-
-```bash
 python -m venv venv
 venv\Scripts\activate
-```
-
-> `venv` is the name of the virtual environment—you can change it if you'd like.
-
-3. Install the required dependencies using the `requirements.txt` file:
-
-```bash
 pip install -r requirements.txt
 ```
 
-4. Get a free Google API Key at [https://developers.google.com/maps/documentation/javascript/get-api-key](https://developers.google.com/maps/documentation/javascript/get-api-key)
-
-5. Create a `gemini.key` file and paste the path to this file into the `gemini_key_path` variable in [app.py](app.py).
-
-6. Inside the `gemini.key` file, paste your API key (from step 4). **Do not include any comments or extra characters**.
-
-7. Run the app:
+1. Get a free API key from [Google AI](https://developers.google.com/maps/documentation/javascript/get-api-key)
+2. Save your key in a file named `gemini.key`
+3. Update `gemini_key_path` in `app.py` with the correct path to `gemini.key`
+4. Run the app:
 
 ```bash
 python app.py
 ```
 
-8. Open your browser and go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to use the app.
+5. Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
+---
 
-## Usage
+## 💡 Usage
 
-You need to upload your resume file first. Then, customize the following settings:
+1. Upload a PDF CV file
+2. Customize:
 
-* `Output Language`: Language of the CV summary (default: Vietnamese)
-* `Summary Length`: Length of the summary (default: 500 words)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-## Roadmap
-
-* [x] Read CV
-  * [x] PDF
-  * [ ] DOCX
-  * [ ] Image
-* [x] Extract information and summarize content
-* [x] Build a basic web interface and demo
-  * [x] Web interface with HTML and CSS
-  * [x] Use Flask backend to read and process data
-* [x] Return results with highlight
-* [x] Set up repositories
-* [ ] Add JD analysis and comparison features
-  * [ ] Add a section to input JD
-    * [ ] Manual input
-    * [ ] Upload file
-  * Add JD analysis
-* [ ] Compare JD with CV
-
-
-See the [open issues](https://github.com/Grizmo2610/CVScanner/issues) for a full list of proposed features (and known issues).
+   * **Output Language** (default: Vietnamese)
+   * **Summary Length** (default: 500 words)
+3. Click **Summarize**
+<!-- 4. (Optional) Add a Job Description to get a match score -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
+## 🗺️ Roadmap
 
-<!-- CONTRIBUTING -->
-## Contributing
+* [x] PDF CV Parsing
+* [ ] DOCX & Image Support
+* [x] Content Summarization
+* [x] Web Interface (HTML, CSS)
+* [x] Flask Backend
+* [x] Highlighted Results
+* [x] GitHub Integration
+* [ ] JD Input Features
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+  * [ ] Manual Input
+  * [ ] File Upload
+* [ ] JD vs CV Matching Logic
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
-
-<a href="https://github.com/Grizmo2610/CVScanner/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Grizmo2610/CVScanner" alt="contrib.rocks image" />
-</a>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the project_license. See `LICENSE.txt` for more information.
+See [open issues](https://github.com/Grizmo2610/CVScanner/issues) for planned features and bug reports.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
+## 🤝 Contributing
 
-<!-- CONTACT -->
-## Contact
+Contributions are what make the open-source community amazing. Any contributions are welcome!
 
-Hoàng Tuấn Tú (You can call me as Grizmo) - [@grizmo](https://www.linkedin.com/in/grizmo/) - hoangtuantu893@gmail.com
+1. Fork the repo
+2. Create a new branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes
+4. Push and open a Pull Request
 
-Project Link: [https://github.com/Grizmo2610/CVScanner](https://github.com/Grizmo2610/CVScanner)
+⭐ Don’t forget to star this project if you find it helpful!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
+## 🪪 License
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-* [othneildrew README Template](https://github.com/othneildrew/Best-README-Template)
+Distributed under the Apache License. See `LICENSE.txt` for details.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📬 Contact
+
+**Hoàng Tuấn Tú** (aka **Grizmo**)
+📧 [hoangtuantu893@gmail.com](mailto:hoangtuantu893@gmail.com)
+🔗 [LinkedIn](https://www.linkedin.com/in/grizmo/)
+🔗 [GitHub Project](https://github.com/Grizmo2610/CVScanner)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🙏 Acknowledgments
+
+* [othneildrew's README Template](https://github.com/othneildrew/Best-README-Template)
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Choose an Open Source License](https://choosealicense.com)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+---
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/Grizmo2610/CVScanner.svg?style=for-the-badge
 [contributors-url]: https://github.com/Grizmo2610/CVScanner/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Grizmo2610/CVScanner.svg?style=for-the-badge
@@ -248,20 +190,3 @@ Project Link: [https://github.com/Grizmo2610/CVScanner](https://github.com/Grizm
 [license-url]: https://github.com/Grizmo2610/CVScanner/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/grizmo
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
