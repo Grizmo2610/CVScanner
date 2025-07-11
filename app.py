@@ -34,17 +34,11 @@ def summarize():
     cv_text = request.form.get('cv_text', '').strip()
     if cv_text:
         reader = GeminiModel(key_path='private/gemini.key')
-            
-        prompt = (
-            f"Please, summarize this CV content in about {limit} word in {lang}. "
-            f"Only summary, no introduction, no questions."
-            f"Highlight special skill and result"
-        )
-        summary = reader.respone(cv_text, prompt)
+        
+        summary = reader.summary(cv_text, lang, limit)
         
         return jsonify({
             'summary': summary,
-            'text': cv_text,
             'match_analysis': 'Matching will be implemented.'
         })
 
@@ -56,12 +50,12 @@ def summarize():
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(file_path)
 
-    reader = PDFReader(file_path, gemini_key_path='private/gemini.key', lang=lang)
-    summary = reader.summary(limit)
+    reader = PDFReader(file_path, gemini_key_path='private/gemini.key')
+    summary = reader.summary(lang, limit)
 
     return jsonify({
         'summary': summary,
-        
+        'match_analysis': 'Matching will be implemented.'
     })
 
 def match_analysis():

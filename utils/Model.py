@@ -1,120 +1,161 @@
 import os
 from pathlib import Path
-import fitz
+import fitz  # PyMuPDF
 from google.genai import Client
-from utils.utils import *
-from typing import Any, Union
+from utils.utils import reading_key
+from typing import Union
 
 class GeminiModel:
-    def __init__(self, model: str = 'gemini-2.5-flash', key_path: str= ...) -> None:
+    """
+    A wrapper class for interacting with the Gemini API to generate content and summaries.
+    """
+
+    def __init__(self, model: str = 'gemini-2.5-flash', key_path: Union[str, None] = None) -> None:
         """
-        Initialize GeminiModel for interacting with Gemini API.
+        Initialize the GeminiModel with API key and model.
 
         Args:
-            model (str): Model name to use. Default is 'gemini-2.5-flash'.
-            key_path (str | ...): API key. If not provided, it reads from environment variable.
+            model (str): The model name to use (e.g., 'gemini-2.5-flash').
+            key_path (str | None): Optional path to the API key file. 
+                                   If None or invalid, the key will be read from the GOOGLE_API_KEY environment variable.
+
+        Raises:
+            ValueError: If the API key cannot be found or loaded.
         """
         self.__model: str = model
         try:
-            path = Path(key_path) 
-            if key_path == ... or path.is_file():
+            path = Path(key_path) if key_path else None
+            if key_path is None or not path.is_file():
                 self.__key: str = os.environ["GOOGLE_API_KEY"]
             else:
-                key = reading_key(key_path)
-                self.__key: str = key
-        except:
+                self.__key: str = reading_key(key_path)
+        except Exception:
             raise ValueError("Gemini Key not found!")
+
         self.__client: Client = Client(api_key=self.__key)
 
     def set_key(self, key: str) -> None:
-        """Set a new API key."""
+        """
+        Update the API key.
+
+        Args:
+            key (str): The new API key to use.
+        """
         self.__key = key
         self.__client = Client(api_key=self.__key)
 
     def set_model(self, model: str = "gemini-2.5-flash") -> None:
-        """Change the model."""
-        self.__model = model
-
-    def respone(self, text: str, config: str = '') -> str:
         """
-        Send a prompt and return the response from Gemini.
+        Change the Gemini model.
 
         Args:
-            text (str): Input content.
-            config (str): Custom prompt configuration.
+            model (str): The new model name to use.
+        """
+        self.__model = model
+
+    def response(self, text: str, config: str = '') -> str:
+        """
+        Send a prompt to the Gemini API and receive a response.
+
+        Args:
+            text (str): The input text content.
+            config (str): Optional custom prompt to prepend to the text.
 
         Returns:
-            str: Output from the model.
+            str: The generated output from the model.
+
+        Raises:
+            ValueError: If the API key is missing.
         """
-        content = f"{config}:\n{text}"
+        if not self.__key:
+            raise ValueError("Gemini Key not found in environment.")
+
+        content: str = f"{config}:\n{text}"
         response = self.__client.models.generate_content(
             model=self.__model, contents=content
         )
         return response.text.strip()
 
-
-class PDFReader:
-    def __init__(self, source: str, gemini_key_path: str = 'private/gemini.key', lang: str = 'vie') -> None:
+    def summary(self, text: str, lang: str, limit: int = 200) -> str:
         """
-        Read and extract text content from a PDF file.
+        Generate a summarized version of the given text using Gemini.
 
         Args:
-            source (str): File path to the PDF.
-            gemini_key_path (str): Path to the API key file.
-            lang (str): Language for summarization output (e.g. 'vie', 'eng').
+            text (str): The full input content to summarize.
+            lang (str): Language of the summary output (e.g., 'eng', 'vie').
+            limit (int): Approximate word limit for the summary.
+
+        Returns:
+            str: The summarized text.
         """
-        path = Path(source)
+        prompt: str = (
+            f"Please, summarize this CV content in about {limit} word in {lang}. "
+            f"Only summary, no introduction, no questions. "
+            f"Highlight special skill and result."
+        )
+        return self.response(text, prompt)
+
+
+class PDFReader:
+    """
+    A class to read and summarize text content from PDF files using GeminiModel.
+    """
+
+    def __init__(self, source: str, gemini_key_path: str = 'private/gemini.key') -> None:
+        """
+        Initialize the PDFReader with the given PDF file and optional API key.
+
+        Args:
+            source (str): Path to the PDF file.
+            gemini_key_path (str): Path to the Gemini API key file.
+        """
         self.content: list[dict[str, Union[int, str]]] = []
-        self.language: str = lang
+        path: Path = Path(source)
 
         if path.is_file() and path.suffix.lower() == ".pdf":
             self.doc: fitz.Document = fitz.open(path)
             for i, page in enumerate(self.doc):
-                text = page.get_text().replace('\n', '\n\n\n')
+                text: str = page.get_text().replace('\n', '\n\n\n')
                 self.content.append({"page": i + 1, "content": text})
 
         self.__ai: GeminiModel = GeminiModel(key_path=gemini_key_path)
 
-    def get_content(self, page: Union[int, None] = ...) -> Union[str, dict[str, Union[int, str]]]:
+    def get_content(self, page: Union[int, None] = None) -> Union[str, dict[str, Union[int, str]]]:
         """
-        Get the content of a specific page or the entire document.
+        Retrieve the content of a specific page or the entire document.
 
         Args:
-            page (int | ...): Page number to extract. If not specified, returns full document text. Page start from 1
+            page (int | None): The 1-based index of the page to extract. If None, return the whole document.
 
         Returns:
-            str | dict: Text content or dictionary with page info.
+            str | dict: The full text content or a dictionary containing a single page's content.
         """
-        if page == ... or not isinstance(page, int):
-            content = ""
+        if page is None or not isinstance(page, int):
+            full_text: str = ""
             for text in self.content:
-                content += text['content'] + '\n\n===============\n\n\n'
-            return content
+                full_text += text['content'] + '\n\n===============\n\n\n'
+            return full_text
         else:
             return self.content[page - 1]
 
-    def summary(self, limit: Union[int, str] = "No limit") -> str:
+    def summary(self, lang: str, limit: Union[int, str] = "No limit") -> str:
         """
-        Summarize the content of the document using Gemini.
+        Generate a summary of the document using Gemini.
 
         Args:
-            limit (int | str): Word limit for the summary. Use "No limit" for no restriction.
+            lang (str): Language of the summary (e.g., 'eng', 'vie').
+            limit (int | str): Word limit for the summary. Use "No limit" to remove restriction.
 
         Returns:
-            str: Summarized content.
+            str: The summarized text.
         """
-        prompt = (
-            f"Please, summarize this CV content in about {limit} word in {self.language}. "
-            f"Only summary, no introduction, no questions."
-            f"Highlight special skill and result"
-        )
-        return self.__ai.respone(self.get_content(), prompt)
+        return self.__ai.summary(self.get_content(), lang, limit)
 
-    def set_key(self, key: str):
+    def set_key(self, key: str) -> None:
         """
-        Set API of Gemini Key model
-        
+        Set or update the Gemini API key.
+
         Args:
-            key: Google API Key
+            key (str): A new API key.
         """
         self.__ai.set_key(key)
