@@ -123,8 +123,7 @@ python app.py
 * [x] Highlighted Results
 * [x] GitHub Integration
 * [ ] JD Input Features
-
-  * [ ] Manual Input
+  * [x] Manual Input
   * [ ] File Upload
 * [ ] JD vs CV Matching Logic
 
