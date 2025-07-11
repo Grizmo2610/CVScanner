@@ -70,7 +70,7 @@ class PDFReader:
         if path.is_file() and path.suffix.lower() == ".pdf":
             self.doc: fitz.Document = fitz.open(path)
             for i, page in enumerate(self.doc):
-                text = page.get_text()
+                text = page.get_text().replace('\n', '\n\n\n')
                 self.content.append({"page": i + 1, "content": text})
 
         self.__ai: GeminiModel = GeminiModel(key_path=gemini_key_path)
@@ -88,7 +88,7 @@ class PDFReader:
         if page == ... or not isinstance(page, int):
             content = ""
             for text in self.content:
-                content += text['content'] + '\n'
+                content += text['content'] + '\n\n===============\n\n\n'
             return content
         else:
             return self.content[page - 1]
